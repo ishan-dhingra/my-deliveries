@@ -23,6 +23,7 @@ import io.realm.RealmResults;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
@@ -95,6 +96,29 @@ public class DeliveryListViewModelTest extends BaseTest {
     }
 
     // Should not do another request in case already loading
+    @Test
+    public void testSyncDeliveries_ShouldNotDoAnotherRequestIfOneAlreadyLoading() {
+        reset(repository);
+        List<Delivery> responseList = MockData.getNDeliveries(5);
+        BehaviorSubject<List<Delivery>> responseSubject = BehaviorSubject.create();
+        when(repository.fetchAndStoreDeliveries())
+                .thenReturn(responseSubject);
+
+        // First request
+        viewModel.syncDeliveries();
+
+        reset(repository);
+
+        when(repository.fetchAndStoreDeliveries())
+                .thenReturn(responseSubject);
+
+        // Second Request
+        viewModel.syncDeliveries();
+
+        verify(repository, never()).fetchAndStoreDeliveries();
+
+
+    }
 
     // Should show error and hide loader in case of API error with empty local cache
 

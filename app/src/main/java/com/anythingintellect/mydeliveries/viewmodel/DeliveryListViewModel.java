@@ -46,28 +46,30 @@ public class DeliveryListViewModel {
     }
 
     public void syncDeliveries() {
-        isLoading.set(true);
-        repository.fetchAndStoreDeliveries()
-                .subscribe(new Observer<List<Delivery>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+        if (!isLoading.get()) {
+            isLoading.set(true);
+            repository.fetchAndStoreDeliveries()
+                    .subscribe(new Observer<List<Delivery>>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onNext(@NonNull List<Delivery> deliveries) {
+                        @Override
+                        public void onNext(@NonNull List<Delivery> deliveries) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
+                        @Override
+                        public void onError(@NonNull Throwable e) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onComplete() {
-                        isLoading.set(false);
-                    }
-                });
+                        @Override
+                        public void onComplete() {
+                            isLoading.set(false);
+                        }
+                    });
+        }
     }
 }
