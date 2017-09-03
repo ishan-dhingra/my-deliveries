@@ -73,6 +73,26 @@ public class RealmLocalStoreTest {
 
     }
     // Should return saved deliveries
+    @Test
+    public void testGetDeliveries_ShouldReturnSavedDeliveries() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final List<Delivery> deliveries = MockData.getNDeliveries(5);
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        realm.copyToRealmOrUpdate(deliveries);
+                    }
+                });
+
+                RealmResults<Delivery> deliveriesResults = localStore.getDeliveries();
+                assertNotEquals(null, deliveriesResults);
+                assertEquals(deliveries.size(), deliveriesResults.size());
+
+            }
+        });
+    }
 
     // Should close realm on close call
 
