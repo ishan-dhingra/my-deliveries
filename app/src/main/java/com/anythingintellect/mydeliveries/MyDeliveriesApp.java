@@ -26,7 +26,7 @@ public class MyDeliveriesApp extends Application {
         initComponent();
     }
 
-    public void initComponent() {
+    private void initComponent() {
         appComponent = DaggerAppComponent.builder()
                 .baseModule(new BaseModule(this))
                 .dBModule(new DBModule(false))

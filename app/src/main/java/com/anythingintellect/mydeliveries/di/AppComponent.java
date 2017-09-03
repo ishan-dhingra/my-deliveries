@@ -12,6 +12,6 @@ import dagger.Component;
 @Singleton
 public interface AppComponent {
 
-    ContextComponent plusFragmentModule(ContextModule contextModule);
+    ContextComponent plusContextModule(ContextModule contextModule);
 
 }
