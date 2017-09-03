@@ -19,11 +19,18 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 @Module
 public class NetworkModule {
 
+    private final String baseUrl;
+
+    public NetworkModule(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
     @Provides
     @Singleton
     public Retrofit providesRetrofit(CallAdapter.Factory callAdapterFactory,
                                      Converter.Factory converterFactory) {
         return new Retrofit.Builder()
+                .baseUrl(baseUrl)
                 .addCallAdapterFactory(callAdapterFactory)
                 .addConverterFactory(converterFactory)
                 .build();

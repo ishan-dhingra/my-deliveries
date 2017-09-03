@@ -26,7 +26,7 @@ public class ToasterTest extends BaseTest {
 
     @Before
     public void setup() {
-        toaster = new Toaster(RuntimeEnvironment.application.getApplicationContext());
+        toaster = new ToasterImpl(RuntimeEnvironment.application.getApplicationContext());
     }
 
     // showLong

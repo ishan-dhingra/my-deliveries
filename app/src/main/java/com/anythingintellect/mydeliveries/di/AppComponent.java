@@ -1,5 +1,7 @@
 package com.anythingintellect.mydeliveries.di;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 
 /**
@@ -7,6 +9,9 @@ import dagger.Component;
  */
 
 @Component(modules = BaseModule.class)
+@Singleton
 public interface AppComponent {
+
+    ContextComponent plusFragmentModule(ContextModule contextModule);
 
 }
