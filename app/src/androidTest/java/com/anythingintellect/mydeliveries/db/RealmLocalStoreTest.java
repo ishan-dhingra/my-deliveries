@@ -139,8 +139,13 @@ public class RealmLocalStoreTest {
     // Should close realm on dispose call
     @Test
     public void testDispose_ShouldCloseRealmOnDisposeCall() {
-        localStore.dispose();
-        assertEquals(true,realm.isClosed());
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                localStore.dispose();
+                assertEquals(true,realm.isClosed());
+            }
+        });
     }
 
 

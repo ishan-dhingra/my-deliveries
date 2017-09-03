@@ -35,6 +35,6 @@ public class RealmLocalStore {
     }
 
     public void dispose() {
-
+        realm.close();
     }
 }
