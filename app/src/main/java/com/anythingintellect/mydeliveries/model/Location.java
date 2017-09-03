@@ -1,10 +1,12 @@
 package com.anythingintellect.mydeliveries.model;
 
+import io.realm.RealmObject;
+
 /**
  * Created by ishan.dhingra on 02/09/17.
  */
 
-public class Location {
+public class Location extends RealmObject {
 
     private double lat;
     private double lng;

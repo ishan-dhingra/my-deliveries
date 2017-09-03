@@ -7,6 +7,6 @@ import dagger.Component;
  */
 
 @Component(modules = BaseModule.class)
-public class AppComponent {
-    
+public interface AppComponent {
+
 }
