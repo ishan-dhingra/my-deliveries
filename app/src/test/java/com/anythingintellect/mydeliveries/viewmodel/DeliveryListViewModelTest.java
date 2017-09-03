@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -122,8 +123,15 @@ public class DeliveryListViewModelTest extends BaseTest {
     }
 
     // Should show error and hide loader in case of API error with empty local cache
+    @Test
+    public void testSyncDeliveries_ShouldShowErrorAndHideLoaderWhenAPIError() {
+        when(repository.fetchAndStoreDeliveries())
+                .thenReturn(Observable.<List<Delivery>>error(new IOException()));
 
-    // Should show error and hide loader toast in case of API with valid local cache
+        viewModel.syncDeliveries();;
+
+        assertEquals(true, viewModel.getShowError().get());
+    }
 
     // dispose
     // Should dispose local store
