@@ -3,11 +3,13 @@ package com.anythingintellect.mydeliveries.viewmodel;
 import android.databinding.ObservableField;
 
 import com.anythingintellect.mydeliveries.BaseTest;
+import com.anythingintellect.mydeliveries.model.Delivery;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import io.reactivex.Observable;
+import io.realm.RealmResults;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -40,6 +42,12 @@ public class DeliveryListViewModelTest extends BaseTest {
 
 
     // Should have non-null RealmResult
+    @Test
+    public void shouldHaveNonNullRealmResultDeliveries() {
+        RealmResults<Delivery> deliveries = viewModel.getDeliveries();
+
+        assertNotEquals(null, deliveries);
+    }
 
     // loadDeliveries
     // Should call repo.loadDeliveriesAndSave
