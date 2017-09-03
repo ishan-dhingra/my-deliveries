@@ -41,4 +41,11 @@ public class ToasterTest extends BaseTest {
 
     // showShort
     // Should show short toast
+    @Test
+    public void testShowShort_ShouldShowShortToast() {
+        String msg = "test";
+        toaster.showShort(msg);
+        assertEquals(msg, ShadowToast.getTextOfLatestToast());
+        assertEquals(Toast.LENGTH_SHORT, ShadowToast.getLatestToast().getDuration());
+    }
 }

@@ -21,4 +21,8 @@ class Toaster {
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
+
+    public void showShort(String msg) {
+
+    }
 }
