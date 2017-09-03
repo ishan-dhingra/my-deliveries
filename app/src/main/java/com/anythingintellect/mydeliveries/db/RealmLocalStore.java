@@ -33,4 +33,8 @@ public class RealmLocalStore {
     public RealmResults<Delivery> getDeliveries() {
         return realm.where(Delivery.class).findAllSortedAsync("id", Sort.ASCENDING);
     }
+
+    public void dispose() {
+
+    }
 }
