@@ -6,6 +6,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Created by ishan.dhingra on 03/09/17.
@@ -30,6 +31,6 @@ public class RealmLocalStore {
 
 
     public RealmResults<Delivery> getDeliveries() {
-        return realm.where(Delivery.class).findAllAsync();
+        return realm.where(Delivery.class).findAllSortedAsync("id", Sort.ASCENDING);
     }
 }
