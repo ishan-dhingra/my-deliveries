@@ -7,8 +7,15 @@ import android.databinding.ObservableField;
  */
 
 public class DeliveryListViewModel {
-    private ObservableField<Boolean> showError;
-    private ObservableField<Boolean> isLoading;
+
+    private final ObservableField<Boolean> showError;
+    private final ObservableField<Boolean> isLoading;
+
+    public DeliveryListViewModel() {
+        this.showError = new ObservableField<>(false);
+        this.isLoading = new ObservableField<>(false);
+    }
+
 
     public ObservableField<Boolean> getShowError() {
         return showError;
