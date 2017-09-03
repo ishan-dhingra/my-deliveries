@@ -30,6 +30,6 @@ public class DeliveryRepository {
     }
 
     public void fetchAndStoreDeliveries() {
-
+        apiService.getDeliveries();
     }
 }
