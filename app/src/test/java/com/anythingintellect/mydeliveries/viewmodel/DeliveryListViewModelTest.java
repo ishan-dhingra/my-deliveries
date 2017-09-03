@@ -18,6 +18,7 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
 import io.realm.RealmResults;
 
 import static org.junit.Assert.assertEquals;
@@ -77,14 +78,27 @@ public class DeliveryListViewModelTest extends BaseTest {
     }
 
 
-    // Should show/hide loaded
-    
+    // Should show/hide loader
+    @Test
+    public void testSyncDeliveries_ShouldShowHideLoader() {
+        List<Delivery> responseList = MockData.getNDeliveries(5);
+        BehaviorSubject<List<Delivery>> responseSubject = BehaviorSubject.create();
+        when(repository.fetchAndStoreDeliveries())
+                .thenReturn(responseSubject);
+
+        viewModel.syncDeliveries();
+
+        assertEquals(true, viewModel.getIsLoading().get());
+        responseSubject.onNext(responseList);
+        responseSubject.onComplete();
+        assertEquals(false, viewModel.getIsLoading().get());
+    }
 
     // Should not do another request in case already loading
 
-    // Should show error in case of API error with empty local cache
+    // Should show error and hide loader in case of API error with empty local cache
 
-    // Should show error toast in case of API with valid local cache
+    // Should show error and hide loader toast in case of API with valid local cache
 
     // dispose
     // Should dispose local store

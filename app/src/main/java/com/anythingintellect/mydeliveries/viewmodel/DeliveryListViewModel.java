@@ -8,6 +8,9 @@ import com.anythingintellect.mydeliveries.repo.DeliveryRepository;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.realm.RealmResults;
 
 /**
@@ -43,6 +46,28 @@ public class DeliveryListViewModel {
     }
 
     public void syncDeliveries() {
-        repository.fetchAndStoreDeliveries();
+        isLoading.set(true);
+        repository.fetchAndStoreDeliveries()
+                .subscribe(new Observer<List<Delivery>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<Delivery> deliveries) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        isLoading.set(false);
+                    }
+                });
     }
 }
