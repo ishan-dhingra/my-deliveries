@@ -28,4 +28,8 @@ public class DeliveryRepository {
     public RealmResults<Delivery> getDeliveries() {
         return localStore.getDeliveries();
     }
+
+    public void fetchAndStoreDeliveries() {
+
+    }
 }
