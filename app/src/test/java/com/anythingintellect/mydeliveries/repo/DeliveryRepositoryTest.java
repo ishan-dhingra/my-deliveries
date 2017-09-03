@@ -1,9 +1,8 @@
 package com.anythingintellect.mydeliveries.repo;
 
+import com.anythingintellect.mydeliveries.BaseTest;
 import com.anythingintellect.mydeliveries.db.LocalStore;
-import com.anythingintellect.mydeliveries.db.RealmLocalStore;
 import com.anythingintellect.mydeliveries.model.Delivery;
-import com.anythingintellect.mydeliveries.model.Location;
 import com.anythingintellect.mydeliveries.network.MyDeliveriesAPIService;
 import com.anythingintellect.mydeliveries.util.MockData;
 
@@ -12,12 +11,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -43,41 +42,20 @@ import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class DeliveryRepositoryTest {
+public class DeliveryRepositoryTest extends BaseTest {
 
     @Mock
     LocalStore localStore;
     @Mock
     MyDeliveriesAPIService apiService;
 
-    private DeliveryRepository repository;
+    private DeliveryRepositoryImpl repository;
 
-    @BeforeClass
-    public static void setupRxJava() {
-        RxAndroidPlugins.setInitMainThreadSchedulerHandler(new Function<Callable<Scheduler>, Scheduler>() {
-            @Override
-            public Scheduler apply(@NonNull Callable<Scheduler> schedulerCallable) throws Exception {
-                return Schedulers.computation();
-            }
-        });
-
-        RxAndroidPlugins.setMainThreadSchedulerHandler(new Function<Scheduler, Scheduler>() {
-            @Override
-            public Scheduler apply(@NonNull Scheduler scheduler) throws Exception {
-                return Schedulers.computation();
-            }
-        });
-    }
-
-    @AfterClass
-    public static void rxTearDown() {
-        RxAndroidPlugins.reset();
-    }
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        repository = new DeliveryRepository(localStore, apiService);
+        repository = new DeliveryRepositoryImpl(localStore, apiService);
         MockData.init();
     }
 
@@ -103,38 +81,14 @@ public class DeliveryRepositoryTest {
 
         Observable<List<Delivery>> observable = repository.fetchAndStoreDeliveries();
 
-        observable.subscribe(new Observer<List<Delivery>>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(@NonNull List<Delivery> deliveries) {
-
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-
+        observable.blockingFirst();
 
         verify(apiService, only()).getDeliveries();
-        verify(localStore, only()).saveDeliveries(responseList);
+        verify(localStore, only()).saveDeliveries(ArgumentMatchers.<Delivery>anyList());
 
 
     }
 
-
-    // fetchSingleDelivery
-    // Should fetch from local store only, as there no API
 
 
 }
