@@ -30,6 +30,6 @@ public class RealmLocalStore {
 
 
     public RealmResults<Delivery> getDeliveries() {
-        return null;
+        return realm.where(Delivery.class).findAllAsync();
     }
 }

@@ -88,11 +88,15 @@ public class RealmLocalStoreTest {
 
                 RealmResults<Delivery> deliveriesResults = localStore.getDeliveries();
                 assertNotEquals(null, deliveriesResults);
+                deliveriesResults.load();
                 assertEquals(deliveries.size(), deliveriesResults.size());
 
             }
         });
     }
+
+    // Should return deliveries in sorted by id order
+
 
     // Should close realm on close call
 
