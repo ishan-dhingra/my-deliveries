@@ -7,6 +7,13 @@ import com.anythingintellect.mydeliveries.db.LocalStore;
 import com.anythingintellect.mydeliveries.model.Delivery;
 import com.anythingintellect.mydeliveries.network.MyDeliveriesAPIService;
 
+import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import io.realm.RealmResults;
 
 /**
@@ -30,6 +37,34 @@ public class DeliveryRepository {
     }
 
     public void fetchAndStoreDeliveries() {
-        apiService.getDeliveries();
+        apiService.getDeliveries()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<List<Delivery>>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull List<Delivery> deliveries) throws Exception {
+                        localStore.saveDeliveries(deliveries);
+                    }
+                }).subscribe(new Observer<List<Delivery>>() {
+            @Override
+            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@io.reactivex.annotations.NonNull List<Delivery> deliveries) {
+
+            }
+
+            @Override
+            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 }
