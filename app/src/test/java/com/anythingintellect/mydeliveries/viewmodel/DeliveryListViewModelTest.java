@@ -83,9 +83,7 @@ public class DeliveryListViewModelTest extends BaseTest {
     @Test
     public void testSyncDeliveries_ShouldShowHideLoader() {
         List<Delivery> responseList = MockData.getNDeliveries(5);
-        BehaviorSubject<List<Delivery>> responseSubject = BehaviorSubject.create();
-        when(repository.fetchAndStoreDeliveries())
-                .thenReturn(responseSubject);
+        BehaviorSubject<List<Delivery>> responseSubject = givenRepositoryWithFetchDeliveryBehaviour();
 
         viewModel.syncDeliveries();
 
@@ -95,22 +93,25 @@ public class DeliveryListViewModelTest extends BaseTest {
         assertEquals(false, viewModel.getIsLoading().get());
     }
 
+    private BehaviorSubject<List<Delivery>> givenRepositoryWithFetchDeliveryBehaviour() {
+        BehaviorSubject<List<Delivery>> responseSubject = BehaviorSubject.create();
+        when(repository.fetchAndStoreDeliveries())
+                .thenReturn(responseSubject);
+        return responseSubject;
+    }
+
     // Should not do another request in case already loading
     @Test
     public void testSyncDeliveries_ShouldNotDoAnotherRequestIfOneAlreadyLoading() {
         reset(repository);
-        List<Delivery> responseList = MockData.getNDeliveries(5);
-        BehaviorSubject<List<Delivery>> responseSubject = BehaviorSubject.create();
-        when(repository.fetchAndStoreDeliveries())
-                .thenReturn(responseSubject);
+        givenRepositoryWithFetchDeliveryBehaviour();
 
         // First request
         viewModel.syncDeliveries();
 
         reset(repository);
 
-        when(repository.fetchAndStoreDeliveries())
-                .thenReturn(responseSubject);
+        givenRepositoryWithFetchDeliveryBehaviour();
 
         // Second Request
         viewModel.syncDeliveries();
