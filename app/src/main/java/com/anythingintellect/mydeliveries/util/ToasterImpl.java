@@ -29,4 +29,14 @@ public class ToasterImpl implements Toaster {
         toast.setGravity(Gravity.CENTER, 0 , 0);
         toast.show();
     }
+
+    @Override
+    public void showLong(int string) {
+        showLong(context.getString(string));
+    }
+
+    @Override
+    public void showShort(int string) {
+        showShort(context.getString(string));
+    }
 }

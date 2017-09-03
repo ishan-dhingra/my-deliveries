@@ -6,6 +6,7 @@ import com.anythingintellect.mydeliveries.BaseTest;
 import com.anythingintellect.mydeliveries.model.Delivery;
 import com.anythingintellect.mydeliveries.repo.DeliveryRepository;
 import com.anythingintellect.mydeliveries.util.MockData;
+import com.anythingintellect.mydeliveries.util.Toaster;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,13 +41,15 @@ public class DeliveryListViewModelTest extends BaseTest {
 
     @Mock
     DeliveryRepository repository;
+    @Mock
+    Toaster toaster;
     private DeliveryListViewModel viewModel;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         MockData.init();
-        viewModel = new DeliveryListViewModel(repository);
+        viewModel = new DeliveryListViewModel(repository, toaster);
     }
 
 
@@ -128,13 +131,14 @@ public class DeliveryListViewModelTest extends BaseTest {
         when(repository.fetchAndStoreDeliveries())
                 .thenReturn(Observable.<List<Delivery>>error(new IOException()));
 
-        viewModel.syncDeliveries();;
+        viewModel.syncDeliveries();
 
         assertEquals(true, viewModel.getShowError().get());
     }
 
     // dispose
     // Should dispose local store
+
 
 
 }

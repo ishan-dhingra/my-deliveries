@@ -2,10 +2,14 @@ package com.anythingintellect.mydeliveries.viewmodel;
 
 import android.databinding.ObservableField;
 
+import com.anythingintellect.mydeliveries.R;
 import com.anythingintellect.mydeliveries.model.Delivery;
 import com.anythingintellect.mydeliveries.repo.DeliveryRepository;
+import com.anythingintellect.mydeliveries.util.Toaster;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -23,13 +27,16 @@ public class DeliveryListViewModel {
     private final ObservableField<Boolean> isLoading;
     private RealmResults<Delivery> deliveries;
 
-    private DeliveryRepository repository;
+    DeliveryRepository repository;
+    Toaster toaster;
 
-    public DeliveryListViewModel(DeliveryRepository repository) {
+    @Inject
+    public DeliveryListViewModel(DeliveryRepository repository, Toaster toaster) {
         this.repository = repository;
         this.showError = new ObservableField<>(false);
         this.isLoading = new ObservableField<>(false);
         this.deliveries = repository.getDeliveries();
+        this.toaster = toaster;
     }
 
 
@@ -48,6 +55,7 @@ public class DeliveryListViewModel {
     public void syncDeliveries() {
         if (!isLoading.get()) {
             isLoading.set(true);
+            showError.set(false);
             repository.fetchAndStoreDeliveries()
                     .subscribe(new Observer<List<Delivery>>() {
                         @Override
@@ -62,7 +70,11 @@ public class DeliveryListViewModel {
 
                         @Override
                         public void onError(@NonNull Throwable e) {
-
+                            if (deliveries == null || deliveries.size() == 0) {
+                                showError.set(true);
+                            } else {
+                                toaster.showLong(R.string.txt_sync_error_toast);
+                            }
                         }
 
                         @Override

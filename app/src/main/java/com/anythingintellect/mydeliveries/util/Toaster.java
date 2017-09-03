@@ -8,4 +8,8 @@ public interface Toaster {
     void showLong(String msg);
 
     void showShort(String msg);
+
+    void showLong(int string);
+
+    void showShort(int string);
 }
