@@ -22,13 +22,16 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.RealmResults;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
@@ -91,14 +94,37 @@ public class DeliveryRepositoryTest {
     }
 
     // fetchAndStoreDeliveries
-    // Should fetch from API and store in local store
+    // Should fetch from API and store in local store; return API Observable
     @Test
     public void testFetchAndStoreDeliveries_shouldFetchFromAPIAndStoreInLocalStore() {
         List<Delivery> responseList = MockData.getNDeliveries(5);
         Observable<List<Delivery>> response = Observable.just(responseList);
         when(apiService.getDeliveries()).thenReturn(response);
 
-        repository.fetchAndStoreDeliveries();
+        Observable<List<Delivery>> observable = repository.fetchAndStoreDeliveries();
+
+        observable.subscribe(new Observer<List<Delivery>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull List<Delivery> deliveries) {
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
 
         verify(apiService, only()).getDeliveries();
         verify(localStore, only()).saveDeliveries(responseList);

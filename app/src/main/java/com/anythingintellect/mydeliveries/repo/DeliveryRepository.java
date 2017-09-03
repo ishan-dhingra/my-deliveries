@@ -9,10 +9,12 @@ import com.anythingintellect.mydeliveries.network.MyDeliveriesAPIService;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.RealmResults;
 
@@ -36,35 +38,27 @@ public class DeliveryRepository {
         return localStore.getDeliveries();
     }
 
-    public void fetchAndStoreDeliveries() {
-        apiService.getDeliveries()
+    public Observable<List<Delivery>> fetchAndStoreDeliveries() {
+        return apiService.getDeliveries()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
+                // Hack to assign ids before inserting into db
+                // technically the id should be assigned from server side
+                .map(new Function<List<Delivery>, List<Delivery>>() {
+                    @Override
+                    public List<Delivery> apply(@io.reactivex.annotations.NonNull List<Delivery> deliveries) throws Exception {
+                        int id = 1;
+                        for (Delivery delivery : deliveries) {
+                            delivery.setId(id++);
+                        }
+                        return deliveries;
+                    }
+                })
                 .doOnNext(new Consumer<List<Delivery>>() {
                     @Override
                     public void accept(@io.reactivex.annotations.NonNull List<Delivery> deliveries) throws Exception {
                         localStore.saveDeliveries(deliveries);
                     }
-                }).subscribe(new Observer<List<Delivery>>() {
-            @Override
-            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(@io.reactivex.annotations.NonNull List<Delivery> deliveries) {
-
-            }
-
-            @Override
-            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+                });
     }
 }
