@@ -23,6 +23,7 @@ import io.realm.RealmResults;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -63,17 +64,23 @@ public class DeliveryListViewModelTest extends BaseTest {
     // Should call repo.loadDeliveriesAndSave
     @Test
     public void testSyncDeliveries_ShouldCallRepoLoadDeliveriesAndSave() {
+        // Need to reset, as one of the method is been called in constructor
+        reset(repository);
         List<Delivery> responseList = MockData.getNDeliveries(5);
         when(repository.fetchAndStoreDeliveries())
                 .thenReturn(Observable.just(responseList));
 
-        Observable<List<Delivery>> responseObs = viewModel.syncDeliveries();
+        viewModel.syncDeliveries();
 
-        verify(repository, only()).fetchAndStoreDeliveries();
+        verify(repository).fetchAndStoreDeliveries();
 
     }
 
+
     // Should show/hide loaded
+    
+
+    // Should not do another request in case already loading
 
     // Should show error in case of API error with empty local cache
 

@@ -42,7 +42,7 @@ public class DeliveryListViewModel {
         return deliveries;
     }
 
-    public Observable<List<Delivery>> syncDeliveries() {
-        return null;
+    public void syncDeliveries() {
+        repository.fetchAndStoreDeliveries();
     }
 }
