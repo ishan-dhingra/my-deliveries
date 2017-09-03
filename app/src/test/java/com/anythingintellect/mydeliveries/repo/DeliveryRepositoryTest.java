@@ -41,6 +41,7 @@ public class DeliveryRepositoryTest {
     @Test
     public void testGetDeliveries_ShouldCallLocalStoreForDeliveries() {
 
+        // TODO: Way to create empty RealmResult for mock
         RealmResults<Delivery> deliveriesResults = repository.getDeliveries();
 
         verify(localStore, only()).getDeliveries();

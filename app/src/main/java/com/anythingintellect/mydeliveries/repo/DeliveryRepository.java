@@ -1,5 +1,8 @@
 package com.anythingintellect.mydeliveries.repo;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.anythingintellect.mydeliveries.db.LocalStore;
 import com.anythingintellect.mydeliveries.model.Delivery;
 import com.anythingintellect.mydeliveries.network.MyDeliveriesAPIService;
@@ -12,12 +15,17 @@ import io.realm.RealmResults;
 
 public class DeliveryRepository {
 
-    public DeliveryRepository(LocalStore localStore, MyDeliveriesAPIService apiService) {
+    LocalStore localStore;
+    MyDeliveriesAPIService apiService;
 
+    public DeliveryRepository(@NonNull LocalStore localStore,
+                              @NonNull MyDeliveriesAPIService apiService) {
+        this.localStore = localStore;
+        this.apiService = apiService;
     }
 
 
     public RealmResults<Delivery> getDeliveries() {
-        return null;
+        return localStore.getDeliveries();
     }
 }
