@@ -12,7 +12,7 @@ import io.realm.Sort;
  * Created by ishan.dhingra on 03/09/17.
  */
 
-public class RealmLocalStore {
+public class RealmLocalStore implements LocalStore {
 
     private final Realm realm;
 
@@ -20,6 +20,7 @@ public class RealmLocalStore {
         this.realm = realm;
     }
 
+    @Override
     public void saveDeliveries(final List<Delivery> deliveries) {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -30,10 +31,12 @@ public class RealmLocalStore {
     }
 
 
+    @Override
     public RealmResults<Delivery> getDeliveries() {
         return realm.where(Delivery.class).findAllSortedAsync("id", Sort.ASCENDING);
     }
 
+    @Override
     public void dispose() {
         realm.close();
     }
