@@ -12,12 +12,18 @@ import io.realm.Realm;
 
 public class RealmLocalStore {
 
+    private final Realm realm;
 
     public RealmLocalStore(Realm realm) {
-
+        this.realm = realm;
     }
 
-    public void saveDeliveries(List<Delivery> deliveries) {
-
+    public void saveDeliveries(final List<Delivery> deliveries) {
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(deliveries);
+            }
+        });
     }
 }

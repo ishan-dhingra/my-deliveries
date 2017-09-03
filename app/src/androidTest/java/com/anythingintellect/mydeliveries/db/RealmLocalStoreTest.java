@@ -31,6 +31,7 @@ public class RealmLocalStoreTest {
 
     @Before
     public void setup() {
+        MockData.init();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
