@@ -71,6 +71,7 @@ public class DeliveryRepositoryTest {
         repository.fetchAndStoreDeliveries();
 
         verify(apiService, only()).getDeliveries();
+        verify(localStore, only()).saveDeliveries(responseList);
 
 
     }
