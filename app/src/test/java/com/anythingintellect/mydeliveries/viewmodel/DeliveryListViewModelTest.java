@@ -138,6 +138,13 @@ public class DeliveryListViewModelTest extends BaseTest {
 
     // dispose
     // Should dispose local store
+    @Test
+    public void testDispose_ShouldDisposeLocalStore() {
+        viewModel.dispose();
+        verify(repository).dispose();
+
+    }
+
 
 
 

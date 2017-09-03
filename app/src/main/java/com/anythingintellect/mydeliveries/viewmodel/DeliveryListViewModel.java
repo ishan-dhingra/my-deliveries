@@ -84,4 +84,8 @@ public class DeliveryListViewModel {
                     });
         }
     }
+
+    public void dispose() {
+        repository.dispose();
+    }
 }

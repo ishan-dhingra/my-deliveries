@@ -15,4 +15,5 @@ public interface DeliveryRepository {
 
     RealmResults<Delivery> getDeliveries();
     Observable<List<Delivery>> fetchAndStoreDeliveries();
+    void dispose();
 }

@@ -61,4 +61,9 @@ public class DeliveryRepositoryImpl implements DeliveryRepository {
                     }
                 });
     }
+
+    @Override
+    public void dispose() {
+        localStore.dispose();
+    }
 }
