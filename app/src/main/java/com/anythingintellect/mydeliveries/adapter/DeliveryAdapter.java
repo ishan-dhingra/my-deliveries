@@ -1,17 +1,14 @@
 package com.anythingintellect.mydeliveries.adapter;
 
 import android.databinding.DataBindingUtil;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.anythingintellect.mydeliveries.R;
 import com.anythingintellect.mydeliveries.databinding.ItemDeliveryBinding;
 import com.anythingintellect.mydeliveries.model.Delivery;
 import com.anythingintellect.mydeliveries.util.Navigator;
-import com.anythingintellect.mydeliveries.util.OnDeliverySelectedListener;
 import com.anythingintellect.mydeliveries.viewmodel.DeliveryItemViewModel;
 
 import io.realm.RealmResults;

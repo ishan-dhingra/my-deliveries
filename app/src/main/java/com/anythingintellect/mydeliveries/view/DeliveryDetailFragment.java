@@ -4,17 +4,14 @@ package com.anythingintellect.mydeliveries.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.anythingintellect.mydeliveries.R;
 import com.anythingintellect.mydeliveries.model.Delivery;
 import com.anythingintellect.mydeliveries.model.Location;
-import com.anythingintellect.mydeliveries.util.Toaster;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

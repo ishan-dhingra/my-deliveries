@@ -1,8 +1,6 @@
 package com.anythingintellect.mydeliveries.repo;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.anythingintellect.mydeliveries.db.LocalStore;
 import com.anythingintellect.mydeliveries.model.Delivery;
@@ -11,9 +9,7 @@ import com.anythingintellect.mydeliveries.network.MyDeliveriesAPIService;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;

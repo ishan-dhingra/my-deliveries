@@ -1,7 +1,6 @@
 package com.anythingintellect.mydeliveries.util;
 
 import android.databinding.BindingAdapter;
-import android.net.Uri;
 import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;

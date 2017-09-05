@@ -19,7 +19,6 @@ import com.anythingintellect.mydeliveries.databinding.FragmentDeliveriesListBind
 import com.anythingintellect.mydeliveries.di.ContextModule;
 import com.anythingintellect.mydeliveries.model.Delivery;
 import com.anythingintellect.mydeliveries.util.Navigator;
-import com.anythingintellect.mydeliveries.util.OnDeliverySelectedListener;
 import com.anythingintellect.mydeliveries.viewmodel.DeliveryListViewModel;
 
 import javax.inject.Inject;

@@ -6,9 +6,7 @@ import android.os.Bundle;
 import com.anythingintellect.mydeliveries.MyDeliveriesApp;
 import com.anythingintellect.mydeliveries.R;
 import com.anythingintellect.mydeliveries.di.ContextModule;
-import com.anythingintellect.mydeliveries.model.Delivery;
 import com.anythingintellect.mydeliveries.util.Navigator;
-import com.anythingintellect.mydeliveries.util.OnDeliverySelectedListener;
 
 import javax.inject.Inject;
 
