@@ -59,6 +59,7 @@ public class DeliveryDetailActivity extends AppCompatActivity {
         location.setLat(arguments.getDouble(DeliveryDetailActivity.KEY_LAT));
         location.setLng(arguments.getDouble(DeliveryDetailActivity.KEY_LNG));
         location.setAddress(arguments.getString(DeliveryDetailActivity.KEY_ADDRESS));
+        del.setLocation(location);
         return del;
     }
 }
