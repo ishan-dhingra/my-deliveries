@@ -28,7 +28,10 @@ public class DBModule {
     @Singleton
     public RealmConfiguration providesConfiguration() {
         RealmConfiguration.Builder builder = new RealmConfiguration.Builder();
-        builder.inMemory();
+        if (inMemory) {
+            builder.inMemory();
+        }
+        builder.deleteRealmIfMigrationNeeded();
         return builder.build();
     }
 

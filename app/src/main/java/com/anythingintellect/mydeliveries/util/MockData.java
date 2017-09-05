@@ -25,7 +25,7 @@ public class MockData {
                 JSONObject object = array.optJSONObject(i);
                 Delivery delivery = new Delivery();
                 delivery.setId(i+1);
-                delivery.setImgUrl(object.optString("imageUrl"));
+                delivery.setImageUrl(object.optString("imageUrl"));
                 JSONObject locationObj = object.optJSONObject("location");
                 Location location = new Location();
                 location.setAddress(locationObj.optString("address"));

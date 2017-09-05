@@ -1,11 +1,13 @@
 package com.anythingintellect.mydeliveries.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.realm.RealmObject;
 
 /**
  * Created by ishan.dhingra on 02/09/17.
  */
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Location extends RealmObject {
 
     private double lat;
@@ -35,4 +37,5 @@ public class Location extends RealmObject {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }

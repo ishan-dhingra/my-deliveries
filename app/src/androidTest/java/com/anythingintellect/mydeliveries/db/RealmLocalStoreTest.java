@@ -39,6 +39,12 @@ public class RealmLocalStoreTest {
                 RealmConfiguration.Builder configBuilder = new RealmConfiguration.Builder();
                 configBuilder.inMemory();
                 realm = Realm.getInstance(configBuilder.build());
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        realm.deleteAll();
+                    }
+                });
                 localStore = new RealmLocalStore(realm);
             }
         });
@@ -64,8 +70,9 @@ public class RealmLocalStoreTest {
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        RealmResults<Delivery> realmResults = realm.where(Delivery.class).findAll();
+                        RealmResults<Delivery> realmResults = realm.where(Delivery.class).findAllAsync();
                         assertNotEquals(null, realmResults);
+                        realmResults.load();
                         assertEquals(deliveries.size(), realmResults.size());
                     }
                 });

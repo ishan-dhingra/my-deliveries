@@ -2,6 +2,7 @@ package com.anythingintellect.mydeliveries.repo;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.anythingintellect.mydeliveries.db.LocalStore;
 import com.anythingintellect.mydeliveries.model.Delivery;

@@ -5,4 +5,9 @@ package rx;
  */
 
 public class Observable {
+
+    public class OnSubscribe {
+
+    }
+
 }

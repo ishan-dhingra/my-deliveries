@@ -16,7 +16,7 @@ public class Delivery extends RealmObject {
     @PrimaryKey
     private long id;
     private String description;
-    private String imgUrl;
+    private String imageUrl;
     private Location location;
 
     public String getDescription() {
@@ -25,14 +25,6 @@ public class Delivery extends RealmObject {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
     }
 
     public Location getLocation() {
@@ -49,5 +41,13 @@ public class Delivery extends RealmObject {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

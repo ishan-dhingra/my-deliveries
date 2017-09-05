@@ -75,6 +75,7 @@ public class DeliveryListViewModel {
                             } else {
                                 toaster.showLong(R.string.txt_sync_error_toast);
                             }
+                            isLoading.set(false);
                         }
 
                         @Override

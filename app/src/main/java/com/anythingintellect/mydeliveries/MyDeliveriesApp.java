@@ -8,6 +8,7 @@ import com.anythingintellect.mydeliveries.di.DBModule;
 import com.anythingintellect.mydeliveries.di.DaggerAppComponent;
 import com.anythingintellect.mydeliveries.di.NetworkModule;
 import com.anythingintellect.mydeliveries.util.Constants;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import io.realm.Realm;
 
@@ -23,6 +24,7 @@ public class MyDeliveriesApp extends Application {
     public void onCreate() {
         super.onCreate();
         Realm.init(this);
+        Fresco.initialize(this);
         initComponent();
     }
 

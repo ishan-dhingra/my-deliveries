@@ -1,13 +1,52 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     tools:context="com.anythingintellect.mydeliveries.view.DeliveryListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <data>
+        <variable
+            name="vm"
+            type="com.anythingintellect.mydeliveries.viewmodel.DeliveryListViewModel"/>
+    </data>
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            bind:visible="@{vm.isLoading}"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            bind:visible="@{vm.showError}"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_error"
+                android:drawablePadding="5dp"
+                android:text="@string/txt_error"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="wrap_content"
+                android:text="@string/btn_retry"
+                android:layout_marginTop="10dp"
+                android:onClick="@{()-> vm.syncDeliveries()}"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</layout>
