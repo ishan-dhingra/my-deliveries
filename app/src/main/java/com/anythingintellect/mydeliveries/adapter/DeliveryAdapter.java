@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.anythingintellect.mydeliveries.R;
 import com.anythingintellect.mydeliveries.databinding.ItemDeliveryBinding;
 import com.anythingintellect.mydeliveries.model.Delivery;
+import com.anythingintellect.mydeliveries.util.Navigator;
 import com.anythingintellect.mydeliveries.util.OnDeliverySelectedListener;
 import com.anythingintellect.mydeliveries.viewmodel.DeliveryItemViewModel;
 
@@ -22,11 +23,11 @@ import io.realm.RealmResults;
 public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.DeliveryViewHolder> {
 
     private final RealmResults<Delivery> deliveries;
-    private final OnDeliverySelectedListener deliverySelectedListener;
+    private final Navigator navigator;
 
-    public DeliveryAdapter(RealmResults<Delivery> deliveries, OnDeliverySelectedListener deliverySelectedListener) {
+    public DeliveryAdapter(RealmResults<Delivery> deliveries, Navigator navigator) {
         this.deliveries = deliveries;
-        this.deliverySelectedListener = deliverySelectedListener;
+        this.navigator = navigator;
     }
 
 
@@ -36,7 +37,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Delive
     public DeliveryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemDeliveryBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()), R.layout.item_delivery, parent, false);
-        return new DeliveryViewHolder(binding, new DeliveryItemViewModel(deliverySelectedListener));
+        return new DeliveryViewHolder(binding, new DeliveryItemViewModel(navigator));
     }
 
     @Override

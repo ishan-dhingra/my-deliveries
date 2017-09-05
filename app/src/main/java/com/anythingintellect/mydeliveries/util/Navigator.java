@@ -7,9 +7,7 @@ import com.anythingintellect.mydeliveries.model.Delivery;
  */
 
 public interface Navigator {
-    void addDeliveryList();
+    void showDeliveryList();
 
-    void addDeliveryDetail(Delivery delivery);
-
-    void openDeliveryDetail(Delivery delivery);
+    void showDeliveryDetail(Delivery delivery);
 }

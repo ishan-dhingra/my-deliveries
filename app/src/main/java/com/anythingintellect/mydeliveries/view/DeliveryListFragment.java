@@ -18,6 +18,7 @@ import com.anythingintellect.mydeliveries.adapter.DeliveryAdapter;
 import com.anythingintellect.mydeliveries.databinding.FragmentDeliveriesListBinding;
 import com.anythingintellect.mydeliveries.di.ContextModule;
 import com.anythingintellect.mydeliveries.model.Delivery;
+import com.anythingintellect.mydeliveries.util.Navigator;
 import com.anythingintellect.mydeliveries.util.OnDeliverySelectedListener;
 import com.anythingintellect.mydeliveries.viewmodel.DeliveryListViewModel;
 
@@ -34,6 +35,8 @@ public class DeliveryListFragment extends Fragment {
 
     @Inject
     DeliveryListViewModel viewModel;
+    @Inject
+    Navigator navigator;
 
     private DeliveryAdapter adapter;
 
@@ -46,9 +49,8 @@ public class DeliveryListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         inject();
-        adapter = new DeliveryAdapter(viewModel.getDeliveries(),
-                (OnDeliverySelectedListener) getActivity());
-        viewModel.syncDeliveries();;
+        adapter = new DeliveryAdapter(viewModel.getDeliveries(), navigator);
+        viewModel.syncDeliveries();
     }
 
     private void inject() {

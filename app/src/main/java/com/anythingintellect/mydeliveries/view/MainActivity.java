@@ -12,7 +12,7 @@ import com.anythingintellect.mydeliveries.util.OnDeliverySelectedListener;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements OnDeliverySelectedListener {
+public class MainActivity extends AppCompatActivity  {
 
     @Inject
     Navigator navigator;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements OnDeliverySelecte
         setContentView(R.layout.activity_main);
         inject();
         if (savedInstanceState == null) {
-            navigator.addDeliveryList();
+            navigator.showDeliveryList();
         }
     }
 
@@ -34,12 +34,4 @@ public class MainActivity extends AppCompatActivity implements OnDeliverySelecte
                 .inject(this);
     }
 
-    @Override
-    public void onDeliverySelected(Delivery delivery) {
-        if (findViewById(R.id.delivery_detail_container) == null) {
-            navigator.openDeliveryDetail(delivery);
-        } else {
-            navigator.addDeliveryDetail(delivery);
-        }
-    }
 }

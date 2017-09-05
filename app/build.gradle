@@ -57,4 +57,7 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.8.47'
     testCompile 'org.robolectric:robolectric:3.4.2'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    // Maps
+    compile 'com.google.android.gms:play-services-maps:11.0.2'
+    compile 'com.google.maps.android:android-maps-utils:0.5'
 }

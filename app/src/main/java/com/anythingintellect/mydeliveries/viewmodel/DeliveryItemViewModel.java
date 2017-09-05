@@ -3,6 +3,7 @@ package com.anythingintellect.mydeliveries.viewmodel;
 import android.databinding.ObservableField;
 
 import com.anythingintellect.mydeliveries.model.Delivery;
+import com.anythingintellect.mydeliveries.util.Navigator;
 import com.anythingintellect.mydeliveries.util.OnDeliverySelectedListener;
 
 /**
@@ -12,10 +13,10 @@ import com.anythingintellect.mydeliveries.util.OnDeliverySelectedListener;
 public class DeliveryItemViewModel {
 
     private Delivery delivery;
-    private final OnDeliverySelectedListener onDeliverySelectedListener;
+    private final Navigator navigator;
 
-    public DeliveryItemViewModel(OnDeliverySelectedListener onDeliverySelectedListener) {
-        this.onDeliverySelectedListener = onDeliverySelectedListener;
+    public DeliveryItemViewModel(Navigator navigator) {
+        this.navigator = navigator;
     }
 
     public Delivery getDelivery() {
@@ -27,6 +28,6 @@ public class DeliveryItemViewModel {
     }
 
     public void onClick() {
-        onDeliverySelectedListener.onDeliverySelected(delivery);
+        navigator.showDeliveryDetail(delivery);
     }
 }

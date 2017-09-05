@@ -25,9 +25,18 @@ public class DefaultNavigator implements Navigator {
     }
 
     @Override
-    public void addDeliveryList() {
+    public void showDeliveryList() {
         DeliveryListFragment deliveryListFragment = new DeliveryListFragment();
         replaceFragment(R.id.delivery_list_container, deliveryListFragment);
+    }
+
+    @Override
+    public void showDeliveryDetail(Delivery delivery) {
+        if (((AppCompatActivity)context).findViewById(R.id.delivery_detail_container)== null) {
+            openDeliveryDetail(delivery);
+        } else {
+            addDeliveryDetail(delivery);
+        }
     }
 
     private void replaceFragment(int container, Fragment fragment) {
@@ -37,16 +46,17 @@ public class DefaultNavigator implements Navigator {
                 .commit();
     }
 
-    @Override
     public void addDeliveryDetail(Delivery delivery) {
         DeliveryDetailFragment deliveryDetailFragment = new DeliveryDetailFragment();
+        deliveryDetailFragment.setArguments(DeliveryDetailActivity.getParam(delivery));
         replaceFragment(R.id.delivery_detail_container, deliveryDetailFragment);
     }
 
-    @Override
     public void openDeliveryDetail(Delivery delivery) {
         Intent detailIntent = new Intent(context, DeliveryDetailActivity.class);
+        detailIntent.putExtras(DeliveryDetailActivity.getParam(delivery));
         context.startActivity(detailIntent);
     }
+
 
 }

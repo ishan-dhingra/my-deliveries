@@ -1,5 +1,6 @@
 package com.anythingintellect.mydeliveries.di;
 
+import com.anythingintellect.mydeliveries.view.DeliveryDetailActivity;
 import com.anythingintellect.mydeliveries.view.DeliveryListFragment;
 import com.anythingintellect.mydeliveries.view.MainActivity;
 
@@ -13,6 +14,7 @@ import dagger.Subcomponent;
 public interface ContextComponent {
 
     void inject(MainActivity mainActivity);
+    void inject(DeliveryDetailActivity mainActivity);
     void inject(DeliveryListFragment deliveryListFragment);
 
 }
