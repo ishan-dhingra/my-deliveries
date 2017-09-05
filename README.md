@@ -1,6 +1,6 @@
-#My Deliveries - Showing off implementation of master detail view using MVVM, RxJava, Android Data binding, Dagger 2, Retrofit, Realm and Google Maps.
+# My Deliveries - Showing off implementation of master detail view using MVVM, RxJava, Android Data binding, Dagger 2, Retrofit, Realm and Google Maps.
 
-<a href="">Download APK</a>
+<a href="https://github.com/ishan-dhingra/my-deliveries/raw/master/app-debug.apk">Download APK</a>
 
 Requirement checklist
 
